@@ -18,7 +18,9 @@ class FEdit:
         self.file_data = None
         self.encoding = "UTF-8"
         self.change_title()
-
+		#### =========================================
+		### Window icon
+		#### =========================================
         try:
             self.icon = PhotoImage(file="icon.png")
             self.window.iconphoto(False, self.icon)
@@ -100,6 +102,7 @@ class FEdit:
         help_menu = Menu(self.menubar, tearoff=0, font=self.font)
         help_menu.add_command(label="About FEdit", command=self.show_about)
         help_menu.add_command(label="Web page", command=lambda: webbrowser.open("https://github.com/parsa-kazazi/FEdit"))
+        help_menu.add_command(label="Github push", command=self.push)
         self.menubar.add_cascade(label="Help", menu=help_menu)
 
         scroll_bar_y = Scrollbar(self.window, orient=VERTICAL)
@@ -131,6 +134,12 @@ class FEdit:
         self.info_label2.grid(sticky=E, row=2, column=0)
 
         self.show_info()
+    
+    #### ================================================
+    ### Actualizarea codului pe github
+    #### ================================================
+    def push(self):
+    	os.system("./gitpush.sh")
     
     def open_file(self):
         self.fileaddr = filedialog.askopenfilename(title="Open File")
